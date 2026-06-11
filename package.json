@@ -1,0 +1,24 @@
+{
+  "name": "playwright-typescript-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test --project=chromium",
+    "test:ui": "playwright test --ui --project=chromium",
+    "test:headed": "playwright test --headed --project=chromium",
+    "test:single": "playwright test tests/sdet/account.spec.ts --headed --project=chromium",
+    "openTrace": "npx playwright show-trace"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "@playwright/test": "^1.60.0",
+    "allure-playwright": "^3.9.0",
+    "dotenv": "^17.4.2",
+    "playwright": "^1.60.0",
+    "typescript": "^6.0.3"
+  }
+}

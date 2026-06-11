@@ -1,0 +1,35 @@
+import { test, expect, APIResponse } from '@playwright/test';
+import apiController from "../../controller/api.controller";
+import type ContactPage from "../../pages/contact.page";
+
+test.describe('Contact', () => {
+  let contactPage: ContactPage;
+  let randomPerson: APIResponse;
+
+  test.beforeAll(async () => {
+    await apiController.init();
+    randomPerson = await apiController.getUsers();
+    console.log(randomPerson)
+    const newUserTodo = await apiController.createUserTodo();
+    console.log(newUserTodo);
+  })
+
+
+  test('Fill contact form and verify success message', async ({ page }) => {
+    contactPage = new ContactPage(page);
+
+    // open contact page
+    await contactPage.navigate()
+
+    //  fill out the input fields and submit
+    await contactPage.submitForm(
+        randomPerson['name'],
+        randomPerson['email'],
+        randomPerson['phone'],
+        randomPerson['website']
+    );
+
+    // verify success message
+    await expect(contactPage.successTxt).toHaveText('Thanks for contacting us! We will be in touch with you shortly')
+  })
+})
